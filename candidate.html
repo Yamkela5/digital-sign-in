@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAPACITI Digital Attendance System</title>
+  <link rel="stylesheet" href="/candidate.css">
+</head>
+<body>
+  <div class="app-container">
+
+    
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
+        <div class="logo-container">
+          <img src="/assets/capacitiza_logo-removebg-preview 1.png" alt="CAPACITI" class="logo">
+        </div>
+        
+        <div class="user-info">
+          <div class="user-welcome">
+            <div class="username">Welcome, <span id="header-username">Mmabotse</span></div>
+            <div class="current-time" id="current-time">Loading...</div>
+          </div>
+          
+          <div class="avatar">
+            <div class="avatar-fallback" id="header-avatar">
+              <i class="user-icon">👤</i>
+              <img id="header-profile-image" class="profile-image hidden" alt="Profile">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <!-- Sidebar Overlay -->
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+      
+      <!-- Sidebar -->
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-header">
+            <span id="sidebar-username">Mmabotse</span>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="sidebar-menu-item active" id="dashboard-menu">
+              <a href="#" class="sidebar-link">
+                <i class="icon">🏠</i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="sidebar-menu-item" id="profile-menu">
+              <a href="#" class="sidebar-link">
+                <i class="icon"></i>
+                <span>Profile</span>
+              </a>
+            </li>
+            <li class="sidebar-menu-item" id="signout-menu">
+              <a href="#" class="sidebar-link">
+                <i class="icon">🚪</i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Dashboard Content -->
+        <div class="dashboard-content" id="dashboard-content">
+          <div>
+            <h2 class="dashboard-title">Candidate Dashboard</h2>
+          </div>
+          
+          <div id="sign-in-reminder" class="sign-in-reminder hidden">
+            <i class="warning-icon">⚠️</i>
+            <span>Please remember to sign in by 09:00</span>
+          </div>
+          
+          <div class="attendance-card">
+            <div class="card-header">
+              <h3 class="card-title">Today's Attendance</h3>
+              <div class="badge">AI Academy 2025</div>
+            </div>
+            
+            <div class="attendance-status">
+              <div class="status-icon-container">
+                <div class="status-icon not-signed-in" id="status-icon">✕</div>
+              </div>
+              <div class="status-info">
+                <h4 class="status-title" id="status-title">Not Signed In</h4>
+                <p class="status-desc" id="status-description">You have not signed in for today yet</p>
+              </div>
+              <div class="status-time" id="status-time-container">
+                <span class="time-badge">Sign-in closes at 9:15 AM</span>
+              </div>
+            </div>
+            
+            <div id="late-reason-form" class="late-reason-form hidden">
+              <h4 class="form-title">Reason for being late</h4>
+              <textarea id="late-reason" class="reason-textarea" rows="3" placeholder="Please explain why you are late today..."></textarea>
+              <button class="button submit-reason-btn" id="submit-reason-btn">Submit Reason</button>
+            </div>
+            
+            <div class="attendance-actions">
+              <button class="button primary-button" id="sign-in-btn">
+                <i class="check-icon">✓</i>
+                Tap to sign in
+              </button>
+              <button class="button secondary-button" id="view-history-btn">View History</button>
+            </div>
+          </div>
+          
+          <div id="attendance-history" class="history-card hidden">
+            <div class="card-header">
+              <h3 class="card-title">Attendance History</h3>
+            </div>
+            
+            <div class="table-responsive">
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Reason</th>
+                  </tr>
+                </thead>
+                <tbody id="history-table-body">
+                  <!-- Table rows will be inserted here by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="download-section">
+              <button class="button download-btn" id="download-btn">
+                <i class="download-icon"></i>
+               
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Profile Content -->
+        <div class="profile-content hidden" id="profile-content">
+          <div>
+            <h2 class="dashboard-title">My Profile</h2>
+          </div>
+          
+          <div class="profile-card">
+            <div class="card-header">
+              <h3 class="card-title">Profile Information</h3>
+            </div>
+            
+            <div class="profile-details">
+              <div class="profile-avatar">
+                <div class="avatar-large" id="profile-avatar-container">
+                  <i class="user-icon-large" id="profile-avatar-icon">👤</i>
+                  <img id="profile-avatar-image" class="profile-image-large hidden" alt="Profile">
+                </div>
+                <label for="profile-upload" class="upload-button">
+                  Change Profile Picture
+                </label>
+                <input type="file" id="profile-upload" accept="image/*" class="hidden">
+              </div>
+              
+              <div class="profile-info">
+                <div class="info-group">
+                  <div class="info-label">Full Name</div>
+                  <div class="info-value" id="profile-fullname">Mmabotse</div>
+                </div>
+                <div class="info-group">
+                  <div class="info-label">Email</div>
+                  <div class="info-value" id="profile-email">mmabotse@example.com</div>
+                </div>
+                <div class="info-group">
+                  <div class="info-label">Program</div>
+                  <div class="info-value" id="profile-program">AI Academy 2025</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="profile-card">
+            <div class="card-header">
+              <h3 class="card-title">🔒 Change Password</h3>
+            </div>
+            
+            <form id="password-form" class="password-form">
+              <div class="form-group">
+                <label for="current-password">Current Password</label>
+                <input type="password" id="current-password" placeholder="Enter your current password">
+              </div>
+              
+              <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter your new password">
+              </div>
+              
+              <div class="form-group">
+                <label for="confirm-password">Confirm New Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm your new password">
+              </div>
+              
+              <button type="submit" class="button primary-button">Update Password</button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        © 2025 CAPACITI Digital Attendance System 
+        <div class="footer-links">
+          <a href="/privacy" class="footer-link">Privacy Policy</a>
+          <a href="/help" class="footer-link">Help</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <script src="/candidate.js"></script>
+</body>
+</html>

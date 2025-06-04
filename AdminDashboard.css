@@ -1,0 +1,241 @@
+/* Base styles */
+:root {
+    --capaciti-navy: #1e2d57;
+    --capaciti-navy-light: #2a3a52;
+    --capaciti-present: #10b981;
+    --capaciti-absent: #ef4444;
+    --capaciti-late: #f59e0b;
+    --capaciti-total: #6366f1;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Dashboard container */
+.dashboard-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Stat cards */
+.stat-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-present {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--capaciti-present);
+}
+
+.status-absent {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--capaciti-absent);
+}
+
+.status-late {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--capaciti-late);
+}
+
+/* Chart container */
+.chart-container {
+    height: 300px;
+    position: relative;
+}
+
+/* Chart tabs */
+.chart-tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 1rem;
+}
+
+.chart-tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.chart-tab:hover {
+    color: #111827;
+}
+
+.chart-tab.active {
+    color: var(--capaciti-navy);
+    border-bottom-color: var(--capaciti-navy);
+    font-weight: 500;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--capaciti-navy);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--capaciti-navy-light);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: white;
+    color: #374151;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #f3f4f6;
+}
+
+/* Notifications */
+.notification-item {
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid;
+}
+
+.notification-reminder {
+    background-color: #f0fdf4;
+    border-left-color: #10b981;
+}
+
+.notification-absence {
+    background-color: #fef2f2;
+    border-left-color: #ef4444;
+}
+
+.notification-late {
+    background-color: #fffbeb;
+    border-left-color: #f59e0b;
+}
+
+.notification-card {
+    padding: 1rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.75rem;
+    border-left: 3px solid;
+}
+
+/* Toast notifications */
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toast {
+    background-color: white;
+    color: #374151;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.3s ease-out;
+    max-width: 24rem;
+}
+
+.toast-success {
+    border-left: 3px solid #10b981;
+}
+
+.toast-error {
+    border-left: 3px solid #ef4444;
+}
+
+.toast-warning {
+    border-left: 3px solid #f59e0b;
+}
+
+.toast-info {
+    border-left: 3px solid #3b82f6;
+}
+
+.toast-hide {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Modal styling */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+body.modal-open {
+  overflow: hidden;
+}

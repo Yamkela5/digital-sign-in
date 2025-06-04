@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPACITI Digital Attendance</title>
+    <link rel="stylesheet" href="/Login-page.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 QR Code Library -->
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Fixed Supabase Client - No ES6 modules -->
+    <script src="./config/supabaseClient.js"></script>
+</head>
+<body>
+    <!-- Desktop View -->
+    <div class="desktop-view">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <!-- Left Panel -->
+                <div class="col-md-6 left-panel">
+                    <img src="./assets/Intersect.png"alt="Top Curve" class="top-curve-img">
+                    <img src="./assets/Vector 33.png"alt="Bottom Curve" class="bottom-curve-img">
+
+                    <div class="left-panel-content">
+                        <img src="./assets/capacitiza_logo-removebg-preview 1.png" alt="CAPACITI Logo" height="50">
+                        <div class="welcome-text mt-3">Welcome to CAPACITI Digital Attendance</div>
+                    </div>
+                </div>
+
+                <!-- Right Panel -->
+                <div class="col-md-6 right-panel">
+                    <div class="login-form-container">
+                        <div class="login-form-box">
+                            <div class="login-logo">
+                                <img src="./assets/CAPCITI-LOGO-V3-768x414__1_-removebg-preview 1.png" alt="CAPACITI Logo" height="100">
+                            </div>
+
+                            <div class="login-message">
+                                <p>Say goodbye to long queues and manual registers!</p>
+                                <p>Use this platform to sign in quickly and securely each day.</p>
+                            </div>
+
+                            <!-- Login Form -->
+                            <form id="desktop-login-form">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail:</label>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="example@email.com" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password:</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="********" required>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    </div>
+                                    <div class="forgot-password">
+                                        <a href="#">Forgot password?</a>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" id="desktop-login-button">
+                                    <span class="loading-spinner" id="desktop-spinner" style="display: none;"></span>
+                                    <span id="desktop-button-text">Login</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile View -->
+    <div class="mobile-view">
+        <img src="./assets/Intersect.png" alt="Top Curve" class="top-curve-mobile">
+        <img src="./assets/Vector 33.png"alt="Bottom Curve" class="bottom-curve-mobile">
+
+        <div class="mobile-content">
+            <!-- Mobile Top Logo -->
+            <div class="mobile-top">
+                <div class="mobile-logo">
+                    <img src="./assets/capacitiza_logo-removebg-preview 1.png" alt="CAPACITI Logo" height="50">
+                </div>
+            </div>
+
+            <!-- Buttons Section -->
+            <div class="mobile-buttons" id="mobile-buttons">
+                <button class="btn-login" id="mobile-login-button">Login</button>
+                <button class="btn-scan" id="mobile-scan-button">Scan</button>
+            </div>
+        </div>
+
+        <!-- Mobile Login Form Section -->
+        <div class="mobile-login-form" id="mobile-login-form">
+            <div class="mobile-login-content">
+                <a href="#" id="back-from-login" class="back-button">← Back</a>
+
+                <div class="mobile-login-logo">
+                    <img src="./assets/CAPCITI-LOGO-V3-768x414__1_-removebg-preview 1.png"alt="CAPACITI Logo" height="90">
+                </div>
+                
+                <div class="mobile-login-header">
+                    <h6>Welcome to CAPACITI Digital Attendance</h6>
+                    <p>Say goodbye to queues! Use this platform to sign in quickly and securely using your phone.</p>
+                </div>
+
+                <form id="mobile-login-form-element">
+                    <div class="mobile-form-group">
+                        <label for="mobileEmail">E-mail:</label>
+                        <input type="email" name="mobileEmail" id="mobileEmail" placeholder="login@gmail.com" required>
+                    </div>
+                    
+                    <div class="mobile-form-group">
+                        <label for="mobilePassword">Password:</label>
+                        <input type="password" name="mobilePassword" id="mobilePassword" placeholder="12345678" required>
+                    </div>
+                    
+                    <div class="mobile-form-options">
+                        <div class="mobile-remember-me">
+                            <input type="checkbox" id="mobileRememberMe">
+                            <label for="mobileRememberMe">Remember me</label>
+                        </div>
+                        <a href="#" class="mobile-forgot-password">Forgot password</a>
+                    </div>
+                    
+                    <div class="mobile-form-submit">
+                        <button type="submit" id="mobile-submit-button">
+                            <span class="loading-spinner" id="mobile-spinner" style="display: none;"></span>
+                            <span id="mobile-button-text">Login</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- QR Scan Screen -->
+        <div class="scan-screen" id="scan-screen">
+            <div class="scan-content-wrapper">
+                <a href="#" id="back-from-scan" class="back-button">← Back</a>
+
+                <div class="scan-content">
+                    <h2 class="scan-title"><span>Scan</span> to sign the register</h2>
+                    
+                    <div class="qr-container" id="qr-reader"></div>
+                    
+                    <p class="scan-help">Having trouble? Ask a facilitator for help.</p>
+                    
+                    <button class="scan-button" id="scan-button">Scan</button>
+                </div>
+                
+                <!-- Coral curve at bottom right -->
+                <svg class="coral-curve" viewBox="0 0 200 100" preserveAspectRatio="none">
+                    <path d="M0,100 L200,0 L200,100 Z" fill="#f05454"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Fixed Login Page JS - No ES6 modules -->
+    <script src="Login-page.js"></script>
+</body>
+</html>
+
